@@ -1,8 +1,6 @@
 function cv_store=pst_cross_validate(BOUT,varargin)
-%
-%
-%
-%
+%runs a grid-search over plausible parameters using cross-validated
+%held-out likelihood
 %
 
 %g_min=[ .0001 .001 .01 .025 .05 ];
@@ -82,7 +80,7 @@ for i=1:repetitions
 			trainbouts=BOUT(trainsamples{k});
 			testbouts=BOUT(testsamples{k});
 
-			[f_mat alphabet n pi_dist]=pst_build_matrix(trainbouts,7);
+			[f_mat alphabet n pi_dist]=pst_build_trans_mat(trainbouts,7);
 			tree=pst_learn(f_mat,alphabet,n,'g_min',g_min(j),'p_min',p_min(j),'r',r(j),'alpha',alpha(j),'L',L(j));
 
 			pi_dist=double(pi_dist+1)./sum(pi_dist+1);
